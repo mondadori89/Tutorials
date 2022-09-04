@@ -5,6 +5,7 @@
     - pipeline_completo.groovy
     - comandos.txt
     - dcw-app.zip
+    - aplicativo.zip
 
 </br></br>
 
