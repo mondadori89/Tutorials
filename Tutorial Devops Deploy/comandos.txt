@@ -1,0 +1,22 @@
+
+# Rodar na instância Jenkins
+sudo yum update -y                           # Atualiza os softwares disponiveis para o sistema
+sudo yum install git -y                      # Instala o git
+sudo amazon-linux-extras install docker -y   # Instala o docker
+sudo systemctl start docker                  # Inicia o docker
+sudo usermod -aG docker jenkins              # Da permissões ao Jenkins para rodar comandos Docker
+sudo systemctl restart jenkins               # Reinicia o Jenkins para aplicar as permissões anteriormente adicionadas
+
+
+# Rodar na instância app-server
+docker rm -f $(docker ps -qa)                           # Finaliza todos os containers em execução
+docker run -itd -p 80:3000 REPOSITORY_NAME/dcw-app:TAG  # Inicializa o novo container com a versão especificada
+
+
+# Instala pré-requisitos para serem usados posteriormente
+sudo apt install ruby-full -y   # Instala o Ruby
+wget https://aws-codedeploy-us-east-1.s3.us-east-1.amazonaws.com/latest/install   # Faz o download do agente do codedeploy
+chmod +x ./install                    # Da permissão de execução para o arquivo
+sudo ./install auto > /tmp/logfile    # executa a instalação do agente
+sudo service codedeploy-agent status  # Verifica se o agente foi iniciado corretamente
+sudo reboot                           # Reinicia a maquina para garantir que o agente entre em execução
