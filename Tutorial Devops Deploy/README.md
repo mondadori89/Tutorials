@@ -302,4 +302,3 @@
 **Output: Ao dar Push na branch do Gitlab, Deploy completo será executado**
 </br></br>
     
-
